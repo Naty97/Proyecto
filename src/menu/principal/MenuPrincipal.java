@@ -22,7 +22,7 @@ public class MenuPrincipal {
             case 1:
                 menuNatacion();
                 break;
-            case 2:
+            case 2: 
                 menuPreguntas();
             default:
                 System.out.println("Error! Digite opción válida!!");
@@ -32,7 +32,7 @@ public class MenuPrincipal {
 
     }
     public void menuNatacion() {
-    
+        
     
     }
     public void menuPreguntas() {
