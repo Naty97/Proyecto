@@ -1,12 +1,15 @@
 package Natacion;
 
 public class Competidor {
-    private int id;
+    static int id=0;
     private String nombre;
     
-public Competidor(int id, String nombre) {
-    this.id = id;
+public Competidor( String nombre) {
+    id ++;
     this.nombre = nombre;
-
+    
 }  
+ public int getId() {
+        return id;
+    }
 }
