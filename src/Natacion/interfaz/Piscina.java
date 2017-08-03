@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author Usuario
  */
 public class Piscina extends javax.swing.JFrame {
-
+    int tiempo=0;
     /**
      * Creates new form Piscina
      */
@@ -34,15 +34,20 @@ public class Piscina extends javax.swing.JFrame {
         int posicion= nadador.getY();
         while (posicion < finalPiscina){
             posicion= posicion + 2;
-            nadador.setLocation(nadador.getX(), posicion);
+             nadador.setLocation(nadador.getX(), nadador.getY()+2);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
+                tiempo ++;
+                refrescarTiempo();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Piscina.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
 
+    }
+    public void refrescarTiempo(){
+        cronometro.setText(String.valueOf(tiempo));
     }
 
     /**
@@ -56,6 +61,7 @@ public class Piscina extends javax.swing.JFrame {
 
         piscina = new javax.swing.JPanel();
         nadador = new javax.swing.JLabel();
+        cronometro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,9 +73,11 @@ public class Piscina extends javax.swing.JFrame {
             }
         });
 
-        nadador.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\bbb.png")); // NOI18N
+        nadador.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\cc.png")); // NOI18N
         nadador.setText("jLabel1");
         nadador.setAlignmentY(0.0F);
+
+        cronometro.setText("  0");
 
         javax.swing.GroupLayout piscinaLayout = new javax.swing.GroupLayout(piscina);
         piscina.setLayout(piscinaLayout);
@@ -77,13 +85,20 @@ public class Piscina extends javax.swing.JFrame {
             piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(piscinaLayout.createSequentialGroup()
                 .addComponent(nadador)
-                .addGap(0, 105, Short.MAX_VALUE))
+                .addGap(0, 155, Short.MAX_VALUE))
+            .addGroup(piscinaLayout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(cronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         piscinaLayout.setVerticalGroup(
             piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(piscinaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
                 .addComponent(nadador)
-                .addGap(0, 186, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,6 +160,7 @@ public class Piscina extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cronometro;
     private javax.swing.JLabel nadador;
     private javax.swing.JPanel piscina;
     // End of variables declaration//GEN-END:variables

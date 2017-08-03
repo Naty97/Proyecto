@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MenuPrincipal {
 
-    /*Scanner entrada = new Scanner(System.in);
+    Scanner entrada = new Scanner(System.in);
     private int opcion;
     Competencia competencia = new Competencia();
 
@@ -49,5 +49,5 @@ public class MenuPrincipal {
     public void menuPreguntas() {
     
     
-    }*/
+    }
 }
