@@ -5,48 +5,94 @@
  */
 package Natacion.interfaz;
 
+import Natacion.Competencia;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.Timer;
 
 /**
  *
  * @author Usuario
  */
 public class Piscina extends javax.swing.JFrame {
-    int tiempo=0;
+
+    int tiempo = 0;
+    List<JLabel> nadadores = new ArrayList();
+    private Competencia competencia = new Competencia();
+
     /**
      * Creates new form Piscina
      */
     public Piscina() {
         initComponents();
+        agregarNadadores();
         piscina.setFocusable(true);
-        System.out.println(nadador.getWidth());
+        setTitle("Competencias de Natación");
+        System.out.println(nadador1.getWidth());
         System.out.println(piscina.getWidth());
-        
+        this.getContentPane().setBackground(Color.cyan);
+        piscina.setBackground(Color.CYAN);
+        carril1.setBackground(Color.BLACK);
+        carril1.setOpaque(true);
+        carril2.setBackground(Color.BLACK);
+        carril2.setOpaque(true);
+        carril3.setBackground(Color.BLACK);
+        carril3.setOpaque(true);
+        carril5.setBackground(Color.BLACK);
+        carril5.setOpaque(true);
+//        carril1.setBackground(Color.BLACK); 
     }
-    public int calcularFinal(){
-        return piscina.getWidth()- nadador.getWidth();
-        
+
+    private void agregarNadadores() {
+        JLabel label = new JLabel();
+        label.setSize(50, 50);
+        label.setLocation(10, 50);
+        label.setBackground(Color.RED);
+        label.setOpaque(true);
+        JLabel label2 = new JLabel();
+        label2.setSize(50, 50);
+        label2.setLocation(10, 110);
+        label2.setBackground(Color.BLACK);
+        label2.setOpaque(true);
+        piscina.add(label);
+        nadadores.add(label);
+        nadadores.add(label2);
+        piscina.add(label2);
     }
-    public void mover (){
-        int finalPiscina=calcularFinal();
-        int posicion= nadador.getY();
-        while (posicion < finalPiscina){
-            posicion= posicion + 2;
-             nadador.setLocation(nadador.getX(), nadador.getY()+2);
-            try {
-                Thread.sleep(2000);
-                tiempo ++;
-                refrescarTiempo();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Piscina.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+
+    public int calcularFinal() {
+        return piscina.getWidth() - nadador1.getWidth() - 50;
 
     }
-    public void refrescarTiempo(){
+
+    public void mover() {
+        final int finalPiscina = calcularFinal();
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JLabel item : nadadores) {
+                    if (item.getX() >= finalPiscina) {
+                        ((Timer) e.getSource()).stop();
+                    } else {
+                        int indice = nadadores.indexOf(item);
+                        item.setLocation(
+                                item.getX() + competencia.getCompetidor(indice).getMovimiento(),
+                                item.getY());
+                    }
+                }
+            }
+        };
+        new Timer(1000, taskPerformer).start();
+    }
+
+    public void refrescarTiempo() {
         cronometro.setText(String.valueOf(tiempo));
     }
 
@@ -60,67 +106,127 @@ public class Piscina extends javax.swing.JFrame {
     private void initComponents() {
 
         piscina = new javax.swing.JPanel();
-        nadador = new javax.swing.JLabel();
+        nadador1 = new javax.swing.JLabel();
         cronometro = new javax.swing.JLabel();
+        nadador2 = new javax.swing.JLabel();
+        nadador3 = new javax.swing.JLabel();
+        nadador4 = new javax.swing.JLabel();
+        nadador5 = new javax.swing.JLabel();
+        carril1 = new javax.swing.JLabel();
+        carril2 = new javax.swing.JLabel();
+        carril3 = new javax.swing.JLabel();
+        carril4 = new javax.swing.JLabel();
+        carril5 = new javax.swing.JLabel();
+        btnJugar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        piscina.setMaximumSize(new java.awt.Dimension(300, 400));
-        piscina.setPreferredSize(new java.awt.Dimension(300, 400));
+        piscina.setMaximumSize(new java.awt.Dimension(100, 410));
+        piscina.setName(""); // NOI18N
+        piscina.setPreferredSize(new java.awt.Dimension(100, 410));
         piscina.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 piscinaKeyPressed(evt);
             }
         });
 
-        nadador.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\cc.png")); // NOI18N
-        nadador.setText("jLabel1");
-        nadador.setAlignmentY(0.0F);
+        nadador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nadador1.png"))); // NOI18N
+        nadador1.setAlignmentY(0.0F);
 
         cronometro.setText("  0");
+
+        nadador2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nadador2.png"))); // NOI18N
+
+        nadador3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nadador3.png"))); // NOI18N
+
+        nadador4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nadador4.png"))); // NOI18N
+
+        nadador5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nadador5.png"))); // NOI18N
+
+        btnJugar.setText("Comenzar");
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout piscinaLayout = new javax.swing.GroupLayout(piscina);
         piscina.setLayout(piscinaLayout);
         piscinaLayout.setHorizontalGroup(
             piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(carril1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(carril2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(carril4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(carril3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(piscinaLayout.createSequentialGroup()
-                .addComponent(nadador)
-                .addGap(0, 155, Short.MAX_VALUE))
+                .addGroup(piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nadador5)
+                    .addComponent(nadador4))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(piscinaLayout.createSequentialGroup()
-                .addGap(114, 114, 114)
+                .addGroup(piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nadador2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nadador1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nadador3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(529, Short.MAX_VALUE))
+            .addComponent(carril5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(piscinaLayout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(btnJugar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(93, 93, 93))
         );
         piscinaLayout.setVerticalGroup(
             piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(piscinaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(nadador)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGroup(piscinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnJugar))
+                .addGap(8, 8, 8)
+                .addComponent(nadador1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carril1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(nadador2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carril2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(nadador3)
+                .addGap(28, 28, 28)
+                .addComponent(carril3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(nadador4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(carril5, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carril4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nadador5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(piscina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(piscina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(piscina, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+            .addComponent(piscina, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void piscinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_piscinaKeyPressed
-       switch (evt.getExtendedKeyCode()){
-           case KeyEvent.VK_UP:
-               nadador.setLocation(nadador.getX(), nadador.getY()+2);
-       }
+        mover();
     }//GEN-LAST:event_piscinaKeyPressed
+
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
+        
+    }//GEN-LAST:event_btnJugarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,16 +258,26 @@ public class Piscina extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Piscina piscina=new Piscina ();
-                 piscina.setVisible(true);
-                 piscina.mover();
+                Piscina piscina = new Piscina();
+                piscina.setVisible(true);
+//                 piscina.mover();
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnJugar;
+    private javax.swing.JLabel carril1;
+    private javax.swing.JLabel carril2;
+    private javax.swing.JLabel carril3;
+    private javax.swing.JLabel carril4;
+    private javax.swing.JLabel carril5;
     private javax.swing.JLabel cronometro;
-    private javax.swing.JLabel nadador;
+    private javax.swing.JLabel nadador1;
+    private javax.swing.JLabel nadador2;
+    private javax.swing.JLabel nadador3;
+    private javax.swing.JLabel nadador4;
+    private javax.swing.JLabel nadador5;
     private javax.swing.JPanel piscina;
     // End of variables declaration//GEN-END:variables
 }

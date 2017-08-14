@@ -24,6 +24,9 @@ public class Competencia {
             } 
         }  
 }
+    public Competidor getCompetidor(int indice) {
+        return listaCompetidores.get(indice);
+    }
     public void iniciarCompetencia (){
         
     }

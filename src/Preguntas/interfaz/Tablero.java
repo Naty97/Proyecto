@@ -18,6 +18,7 @@ public class Tablero extends javax.swing.JFrame {
      */
     public Tablero() {
         initComponents();
+        setTitle("Preguntas y Respuestas");
         cargarBotones();
     }
     public void cargarBotones (){
