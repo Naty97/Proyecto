@@ -6,6 +6,7 @@
 package Natacion.interfaz;
 
 import Natacion.Competencia;
+import Natacion.Competidor;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ public class Piscina extends javax.swing.JFrame {
     int tiempo = 0;
     List<JLabel> nadadores = new ArrayList();
     private Competencia competencia = new Competencia();
+    private List <Competidor> competidores;
 
     /**
      * Creates new form Piscina
@@ -49,9 +51,29 @@ public class Piscina extends javax.swing.JFrame {
         carril5.setOpaque(true);
 //        carril1.setBackground(Color.BLACK); 
     }
+    public Piscina(List<Competidor> competidores){
+        initComponents();
+        this.competidores= competidores;
+        agregarNadadores();
+        piscina.setFocusable(true);
+        setTitle("Competencias de Natación");
+        System.out.println(nadador1.getWidth());
+        System.out.println(piscina.getWidth());
+        this.getContentPane().setBackground(Color.cyan);
+        piscina.setBackground(Color.CYAN);
+        carril1.setBackground(Color.BLACK);
+        carril1.setOpaque(true);
+        carril2.setBackground(Color.BLACK);
+        carril2.setOpaque(true);
+        carril3.setBackground(Color.BLACK);
+        carril3.setOpaque(true);
+        carril5.setBackground(Color.BLACK);
+        carril5.setOpaque(true);
+//        carril1.setBackground(Color.BLACK); 
+    }
 
     private void agregarNadadores() {
-        JLabel label = new JLabel();
+        /*JLabel label = new JLabel();
         label.setSize(50, 50);
         label.setLocation(10, 50);
         label.setBackground(Color.RED);
@@ -64,11 +86,23 @@ public class Piscina extends javax.swing.JFrame {
         piscina.add(label);
         nadadores.add(label);
         nadadores.add(label2);
-        piscina.add(label2);
+        piscina.add(label2);*/
+        int posiciony=10;
+        for (Competidor item : competidores) {
+            JLabel label = new JLabel();
+            label.setSize(50, 50);
+            label.setLocation(50, posiciony);
+            label.setBackground(Color.RED);
+            label.setOpaque(true);
+            label.setText(item.getNombre());
+            piscina.add(label);
+            nadadores.add(label);
+            posiciony= posiciony + 60;
+        }
     }
 
     public int calcularFinal() {
-        return piscina.getWidth() - nadador1.getWidth() - 50;
+        return piscina.getWidth() - 50;
 
     }
 
@@ -79,17 +113,35 @@ public class Piscina extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 for (JLabel item : nadadores) {
                     if (item.getX() >= finalPiscina) {
+                        finalJuego ();
                         ((Timer) e.getSource()).stop();
                     } else {
                         int indice = nadadores.indexOf(item);
                         item.setLocation(
-                                item.getX() + competencia.getCompetidor(indice).getMovimiento(),
+                                item.getX() + competidores.get(indice).getMovimiento(),
                                 item.getY());
                     }
                 }
+                tiempo ++;
+                refrescarTiempo();
             }
         };
         new Timer(1000, taskPerformer).start();
+    }
+    public void finalJuego(){
+        final int finalPiscina = calcularFinal();
+        List <Integer> contGanadores= new ArrayList();
+        for (JLabel item : nadadores) {
+            if (item.getX() >= finalPiscina) {
+                contGanadores.add(nadadores.indexOf(item));
+            }
+  
+        }
+        if (contGanadores.size()>1){
+            
+        }else{
+            System.out.println("El ganador es "+ nadadores.get(contGanadores.get(0)).getText());
+        }
     }
 
     public void refrescarTiempo() {
@@ -231,12 +283,9 @@ public class Piscina extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    /*public static void main(String args[]) {
+        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -255,7 +304,7 @@ public class Piscina extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Piscina piscina = new Piscina();
@@ -264,7 +313,7 @@ public class Piscina extends javax.swing.JFrame {
             }
         });
     }
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
     private javax.swing.JLabel carril1;

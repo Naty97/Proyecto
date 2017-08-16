@@ -17,6 +17,9 @@ public class Competencia {
            
         }
     }
+    public List <Competidor>getCompetidores (){
+        return listaCompetidores;
+    }
     public void eliminarCompetidor(int id) {
         for(Competidor item: listaCompetidores) {
             if(item.getId() == id) {

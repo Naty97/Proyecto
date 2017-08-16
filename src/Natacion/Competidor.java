@@ -22,5 +22,9 @@ public class Competidor {
 
     public int getMovimiento() {
         return movimiento;
+      
+    }
+    public String getNombre(){
+        return nombre;
     }
 }
