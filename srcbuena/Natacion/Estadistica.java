@@ -15,7 +15,7 @@ public class Estadistica {
     public void aumentarRecord() {
         this.victorias++;
     }
-
+    
     public void aumentarPerdidas() {
         this.perdidas++;
     }
@@ -23,11 +23,11 @@ public class Estadistica {
     public int getIdCompetidor() {
         return this.idCompetidor;
     }
-
+    
     public int getVictorias() {
         return this.victorias;
     }
-
+    
     public int getPerdidas() {
         return this.perdidas;
     }

@@ -13,9 +13,9 @@ public class Competidor {
         this.movimiento = generarRandom();
         id++;
     }
-
+    
     public void generarMovimiento() {
-        this.movimiento = 20;//(int) Math.floor(Math.random() * 20 + 1);
+        this.movimiento = (int) Math.floor(Math.random() * 20 + 1);
     }
 
     private int generarRandom() {
@@ -28,9 +28,9 @@ public class Competidor {
 
     public int getMovimiento() {
         return movimiento;
+      
     }
-
-    public String getNombre() {
+    public String getNombre(){
         return nombre;
     }
 }
