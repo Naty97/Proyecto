@@ -24,8 +24,10 @@ public class Piscina extends javax.swing.JFrame {
 
     int tiempo = 0;
     List<JLabel> nadadores = new ArrayList();
-    private Competencia competencia;
-    private List<Competidor> competidores;
+
+    private Competencia competencia = new Competencia();
+    private List <Competidor> competidores;
+    private List <Estadistica> estadisticas;
 
     /**
      * Creates new form Piscina
@@ -55,6 +57,7 @@ public class Piscina extends javax.swing.JFrame {
         this.competencia = competencia;
         this.competidores = competencia.getCompetidores();
         agregarNadadores();
+        agregarEstadisticas();
         piscina.setFocusable(true);
         setTitle("Competencias de Natación");
         System.out.println(nadador1.getWidth());
@@ -86,7 +89,13 @@ public class Piscina extends javax.swing.JFrame {
             posiciony = posiciony + 60;
         }
     }
-
+    public void agregarEstadisticas(){
+        Estadistica estadistica;
+        for (Competidor item : competidores) {
+            estadistica= new Estadistica(item.getId());
+            estadisticas.add(estadistica);
+        }
+    }
     public int calcularFinal() {
         return piscina.getWidth() - 50;
     }
@@ -130,6 +139,7 @@ public class Piscina extends javax.swing.JFrame {
                 contGanadores.add(nadadores.indexOf(item));
             }
         }
+
         if (contGanadores.size() > 1) {
             System.out.println("Han habido varios ganadores");
             List<Competidor> ganadores = new ArrayList();
@@ -148,9 +158,11 @@ public class Piscina extends javax.swing.JFrame {
                 else {
                     item.aumentarPerdidas();
                 }
+
             }
         }
     }
+    
 
     public void refrescarTiempo() {
         cronometro.setText(String.valueOf(tiempo));
