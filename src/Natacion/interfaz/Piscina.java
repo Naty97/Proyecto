@@ -7,14 +7,12 @@ package Natacion.interfaz;
 
 import Natacion.Competencia;
 import Natacion.Competidor;
+import Natacion.Estadistica;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
@@ -26,8 +24,8 @@ public class Piscina extends javax.swing.JFrame {
 
     int tiempo = 0;
     List<JLabel> nadadores = new ArrayList();
-    private Competencia competencia = new Competencia();
-    private List <Competidor> competidores;
+    private Competencia competencia;
+    private List<Competidor> competidores;
 
     /**
      * Creates new form Piscina
@@ -51,9 +49,11 @@ public class Piscina extends javax.swing.JFrame {
         carril5.setOpaque(true);
 //        carril1.setBackground(Color.BLACK); 
     }
-    public Piscina(List<Competidor> competidores){
+
+    public Piscina(Competencia competencia) {
         initComponents();
-        this.competidores= competidores;
+        this.competencia = competencia;
+        this.competidores = competencia.getCompetidores();
         agregarNadadores();
         piscina.setFocusable(true);
         setTitle("Competencias de Natación");
@@ -73,37 +73,29 @@ public class Piscina extends javax.swing.JFrame {
     }
 
     private void agregarNadadores() {
-        /*JLabel label = new JLabel();
-        label.setSize(50, 50);
-        label.setLocation(10, 50);
-        label.setBackground(Color.RED);
-        label.setOpaque(true);
-        JLabel label2 = new JLabel();
-        label2.setSize(50, 50);
-        label2.setLocation(10, 110);
-        label2.setBackground(Color.BLACK);
-        label2.setOpaque(true);
-        piscina.add(label);
-        nadadores.add(label);
-        nadadores.add(label2);
-        piscina.add(label2);*/
-        int posiciony=10;
+        int posiciony = 10;
         for (Competidor item : competidores) {
             JLabel label = new JLabel();
             label.setSize(50, 50);
-            label.setLocation(50, posiciony);
+            label.setLocation(0, posiciony);
             label.setBackground(Color.RED);
             label.setOpaque(true);
             label.setText(item.getNombre());
             piscina.add(label);
             nadadores.add(label);
-            posiciony= posiciony + 60;
+            posiciony = posiciony + 60;
         }
     }
 
     public int calcularFinal() {
         return piscina.getWidth() - 50;
-
+    }
+    
+    private void iniciarJuego() {
+        for (Competidor item : competidores) {
+            item.generarMovimiento();
+        }
+        mover();
     }
 
     public void mover() {
@@ -113,8 +105,9 @@ public class Piscina extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 for (JLabel item : nadadores) {
                     if (item.getX() >= finalPiscina) {
-                        finalJuego ();
+                        finalJuego();
                         ((Timer) e.getSource()).stop();
+                        return;
                     } else {
                         int indice = nadadores.indexOf(item);
                         item.setLocation(
@@ -122,25 +115,40 @@ public class Piscina extends javax.swing.JFrame {
                                 item.getY());
                     }
                 }
-                tiempo ++;
+                tiempo++;
                 refrescarTiempo();
             }
         };
         new Timer(1000, taskPerformer).start();
     }
-    public void finalJuego(){
+
+    public void finalJuego() {
         final int finalPiscina = calcularFinal();
-        List <Integer> contGanadores= new ArrayList();
+        List<Integer> contGanadores = new ArrayList();
         for (JLabel item : nadadores) {
             if (item.getX() >= finalPiscina) {
                 contGanadores.add(nadadores.indexOf(item));
             }
-  
         }
-        if (contGanadores.size()>1){
-            
-        }else{
-            System.out.println("El ganador es "+ nadadores.get(contGanadores.get(0)).getText());
+        if (contGanadores.size() > 1) {
+            System.out.println("Han habido varios ganadores");
+            List<Competidor> ganadores = new ArrayList();
+            for (Integer item : contGanadores) {
+                ganadores.add(competidores.get(item));
+            }
+            String ganador = competencia.multiplesGanadores(ganadores);
+            System.out.println(ganador);
+            competencia.aumentarCantidadEmpates();
+        } else {
+            System.out.println("El ganador es " + nadadores.get(contGanadores.get(0)).getText());
+            for (Estadistica item : competencia.getEstadisticas()) {
+                if (item.getIdCompetidor() == competidores.get(contGanadores.get(0)).getId()) {
+                    item.aumentarRecord();
+                }
+                else {
+                    item.aumentarPerdidas();
+                }
+            }
         }
     }
 
@@ -171,7 +179,7 @@ public class Piscina extends javax.swing.JFrame {
         carril5 = new javax.swing.JLabel();
         btnJugar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         piscina.setMaximumSize(new java.awt.Dimension(100, 410));
         piscina.setName(""); // NOI18N
@@ -220,12 +228,12 @@ public class Piscina extends javax.swing.JFrame {
                     .addComponent(nadador2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nadador1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nadador3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(529, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(carril5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(piscinaLayout.createSequentialGroup()
                 .addGap(238, 238, 238)
                 .addComponent(btnJugar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addComponent(cronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93))
         );
@@ -262,22 +270,22 @@ public class Piscina extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(piscina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(piscina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(piscina, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(piscina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void piscinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_piscinaKeyPressed
-        mover();
+        iniciarJuego();
     }//GEN-LAST:event_piscinaKeyPressed
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        
+
     }//GEN-LAST:event_btnJugarActionPerformed
 
     /**
@@ -313,7 +321,7 @@ public class Piscina extends javax.swing.JFrame {
             }
         });
     }
-*/
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
     private javax.swing.JLabel carril1;
