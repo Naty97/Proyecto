@@ -8,15 +8,29 @@ public class Competencia {
 
     List<Competidor> listaCompetidores = new ArrayList<>();
     List<Estadistica> estadisticas = new ArrayList<>();
+    List<Cronometro> tiempos = new ArrayList<>();
     private int totalJuegos = 0;
     private int totalEmpates;
 
-    public void agregarCompetidor(Competidor competidor) {
-        if (listaCompetidores.size() < 6) {
+    public boolean agregarCompetidor(Competidor competidor) {
+        if (listaCompetidores.size() < 5) {
             estadisticas.add(new Estadistica(competidor.getId()));
             listaCompetidores.add(competidor);
-
+            return true;
+        } else {
+            return false;
         }
+    }
+    
+    public void limpiarEstadisticas() {
+        estadisticas = new ArrayList<>();
+        tiempos = new ArrayList<>();
+        totalJuegos = 0;
+        totalEmpates = 0;
+    }
+    
+    public void registrarTiempo(int tiempo) {
+        tiempos.add(new Cronometro(tiempo));
     }
 
     public List<Estadistica> getEstadisticas() {
@@ -116,19 +130,19 @@ public class Competencia {
         }
         return posicion;
     }
-
+    
     public void aumentarCantidadJuegos() {
         totalJuegos++;
     }
-
+    
     public int getCantidadJuegos() {
         return totalJuegos;
     }
-
+    
     public void aumentarCantidadEmpates() {
         totalEmpates++;
     }
-
+    
     public int getCantidadEmpates() {
         return totalEmpates;
     }

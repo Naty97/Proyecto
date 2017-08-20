@@ -3,55 +3,42 @@ package menu.principal;
 import Natacion.Competencia;
 import Natacion.Competidor;
 import Natacion.interfaz.Piscina;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class MenuPrincipal {
 
     Scanner entrada = new Scanner(System.in);
-    private int opcion = 0;
-    String op = "";
+    private int opcion;
     Competencia competencia = new Competencia();
 
     public static void main(String[] args) {
 
         MenuPrincipal menuPrincipal = new MenuPrincipal();
-        String nombre1 = "sara", nombre2 = "juan", nombre3 = "maria";
-        Competidor nadador1 = new Competidor(nombre1);
-        Competidor nadador2 = new Competidor(nombre2);
-        Competidor nadador3 = new Competidor(nombre3);
-        List<Competidor> nadador = new ArrayList<>();
-        nadador.add(nadador1);
-        nadador.add(nadador2);
-        nadador.add(nadador3);
-        menuPrincipal.competencia.agregarCompetidor(nadador1);
-        menuPrincipal.competencia.agregarCompetidor(nadador2);
-        menuPrincipal.competencia.agregarCompetidor(nadador3);
         menuPrincipal.menuUsuario();
     }
 
     public void menuUsuario() {
         do {
-            op = JOptionPane.showInputDialog("******GESTOR DE JUEGOS******\n"
-                    + "Ingrese opción deseada:"
-                    + "1.Competencias de Natación.\n"
+            System.out.println("******GESTOR DE JUEGOS******");
+            System.out.println("1.Competencias de Natación.\n"
                     + "2.Preguntas y Respuestas.\n"
                     + "3.Atrás.");
+            System.out.println("Ingrese opción deseada:");
+            opcion = entrada.nextInt();
             switch (opcion) {
                 case 1:
+
                     menuNatacion();
                     break;
                 case 2:
                     menuPreguntas();
                 default:
-                    JOptionPane.showInputDialog("Error! Digite opción válida!!");
+                    System.out.println("Error! Digite opción válida!!");
                     menuUsuario();
                     break;
             }
         } while (opcion != 4);
-
     }
 
     public void menuNatacion() {
@@ -59,7 +46,8 @@ public class MenuPrincipal {
             System.out.println("1.Ingresar competidor\n2.Eliminar competidor"
                     + "\n3.Iniciar juego\n4.Jugador más ganador"
                     + "\n5.Jugador más perdedor\n6.Estadísticas"
-                    + "\n7. Empates");
+                    + "\n7. Limpiar estadísticas"
+                    + "\n8. Empates");
             System.out.println("Ingrese opción deseada:");
             opcion = entrada.nextInt();
             switch (opcion) {
@@ -67,10 +55,9 @@ public class MenuPrincipal {
                     System.out.println("Digite nombre del competidor:");
                     entrada.nextLine();
                     String nombre = entrada.nextLine();
-
-                    competencia.agregarCompetidor(new Competidor(nombre));
-
-                    //menuNatacion();
+                    if (!competencia.agregarCompetidor(new Competidor(nombre))) {
+                        System.out.println("No se pueden agregar más competidores");
+                    }
                     break;
                 case 2:
 
@@ -100,6 +87,8 @@ public class MenuPrincipal {
                     }
                     break;
                 case 7:
+                    competencia.limpiarEstadisticas();
+                case 8:
                     System.out.println(competencia.getCantidadEmpates());
                 default:
                     System.out.println("Error! Digite opción válida!!");
@@ -108,9 +97,8 @@ public class MenuPrincipal {
             }
         } while (opcion != 8);
     }
-    
-    public void menuPreguntas() {
-    
-    }
 
+    public void menuPreguntas() {
+
+    }
 }
