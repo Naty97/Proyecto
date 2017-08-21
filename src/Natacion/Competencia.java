@@ -21,14 +21,14 @@ public class Competencia {
             return false;
         }
     }
-    
+
     public void limpiarEstadisticas() {
         estadisticas = new ArrayList<>();
         tiempos = new ArrayList<>();
         totalJuegos = 0;
         totalEmpates = 0;
     }
-    
+
     public void registrarTiempo(int tiempo) {
         tiempos.add(new Cronometro(tiempo));
     }
@@ -39,14 +39,6 @@ public class Competencia {
 
     public List<Competidor> getCompetidores() {
         return listaCompetidores;
-    }
-
-    public void eliminarCompetidor(int id) {
-        for (Competidor item : listaCompetidores) {
-            if (item.getId() == id) {
-                listaCompetidores.remove(item);
-            }
-        }
     }
 
     public Competidor getCompetidor(int indice) {
@@ -130,20 +122,38 @@ public class Competencia {
         }
         return posicion;
     }
-    
+
     public void aumentarCantidadJuegos() {
         totalJuegos++;
     }
-    
+
     public int getCantidadJuegos() {
         return totalJuegos;
     }
-    
+
     public void aumentarCantidadEmpates() {
         totalEmpates++;
     }
-    
+
     public int getCantidadEmpates() {
         return totalEmpates;
+    }
+
+    public String mostrarParticipantes() {
+        StringBuilder nadadores = new StringBuilder();
+        for (Competidor item : listaCompetidores) {
+            nadadores.append(String.format("%d. %s\n", item.getId(), item.getNombre()));
+        }
+        return nadadores.toString();
+    }
+
+    public boolean eliminarCompetidor(int id) {
+        for (Competidor item : listaCompetidores) {
+            if (item.getId() == id) {
+                listaCompetidores.remove(item);
+                return true;
+            }
+        }
+        return false;
     }
 }

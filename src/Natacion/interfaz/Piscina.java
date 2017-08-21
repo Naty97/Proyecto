@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Natacion.interfaz;
 
 import Natacion.Competencia;
@@ -14,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -25,7 +21,6 @@ public class Piscina extends javax.swing.JFrame {
     int tiempo = 0;
     List<JLabel> nadadores = new ArrayList();
     private boolean juegoIniciado;
-
     private Competencia competencia = new Competencia();
     private List<Competidor> competidores;
     private List<Estadistica> estadisticas;
@@ -191,16 +186,16 @@ public class Piscina extends javax.swing.JFrame {
             }
         }
         if (contGanadores.size() > 1) {
-            System.out.println("Han habido varios ganadores");
+            JOptionPane.showMessageDialog(null, "Han habido varios ganadores");
             List<Competidor> ganadores = new ArrayList();
             for (Integer item : contGanadores) {
                 ganadores.add(competidores.get(item));
             }
             String ganador = competencia.multiplesGanadores(ganadores);
-            System.out.println(ganador);
+            JOptionPane.showMessageDialog(null, ganador);
             competencia.aumentarCantidadEmpates();
         } else {
-            System.out.println("El ganador es " + nadadores.get(contGanadores.get(0)).getText());
+            JOptionPane.showMessageDialog(null, "El ganador es " + nadadores.get(contGanadores.get(0)).getText());
             for (Estadistica item : competencia.getEstadisticas()) {
                 if (item.getIdCompetidor() == competidores.get(contGanadores.get(0)).getId()) {
                     item.aumentarRecord();
@@ -210,11 +205,11 @@ public class Piscina extends javax.swing.JFrame {
 
             }
         }
-        System.out.println(String.format("Tiempo de la carrera : %d", tiempo));
+        JOptionPane.showMessageDialog(null, String.format("Tiempo de la carrera : %d", tiempo));
         registrarTiempo();
         this.juegoIniciado = false;
         this.btnReiniciar.setEnabled(true);
-        System.out.println(String.format("Cantidad de empates : %d", competencia.getCantidadEmpates()));
+        JOptionPane.showMessageDialog(null, String.format("Cantidad de empates : %d", competencia.getCantidadEmpates()));
     }
 
     public void refrescarTiempo() {
@@ -337,7 +332,7 @@ public class Piscina extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    /*public static void main(String args[]) {
+    public static void main(String args[]) {
         
 
         try {
@@ -367,7 +362,7 @@ public class Piscina extends javax.swing.JFrame {
             }
         });
     }
-     */
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
     private javax.swing.JButton btnReiniciar;
