@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 import Preguntas.Pregunta;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,6 +25,10 @@ public class Tablero extends javax.swing.JFrame {
     private Timer time;
     private int conta = 0;
     JButton boton = new JButton();
+    int puntos = 0;
+    ArrayList<String> pregs = new ArrayList<String>();
+    ArrayList<String> resps = new ArrayList<String>();
+    int numero;
 
     public Tablero() {
         initComponents();
@@ -91,6 +97,31 @@ public class Tablero extends javax.swing.JFrame {
                 } else if (matrizInt[k][l] == 1) {
                     ImageIcon camino = new ImageIcon(this.getClass().getResource("/Iconos/obstaculo.jpg"));
                     matrizLb[k][l] = new JLabel();
+                    matrizLb[k][l].addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+
+                            JLabel obstaculo = (JLabel) e.getSource();
+                            obstaculo.setIcon(new ImageIcon(this.getClass().getResource("/Iconos/espacio.jpg")));
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                        }
+                    });
                     matrizLb[k][l].setBounds(n, m, 80, 80);
                     matrizLb[k][l].setIcon(camino);
                     matrizLb[k][l].setBorder(bordo);
@@ -126,10 +157,8 @@ public class Tablero extends javax.swing.JFrame {
     }
 
     public void preguntas() {
-        ArrayList<String> pregs = new ArrayList<String>();
-        ArrayList<String> resps = new ArrayList<String>();
+
         Random aleaPregs = new Random();
-        int numero;
         numero = (int) Math.floor(Math.random() * 50);
         pregs.add("El elemento básico de Java es el objeto?");
         resps.add("V");
@@ -452,7 +481,13 @@ public class Tablero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCompruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompruebaActionPerformed
-        
+        if (btnTrue.isSelected()) {
+            System.out.print("Su respuesta es afirmativa");
+
+        }
+        if (btnFalse.isSelected()) {
+            System.out.print("Su respuesta es negativa");
+        }
     }//GEN-LAST:event_btnCompruebaActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -481,13 +516,31 @@ public class Tablero extends javax.swing.JFrame {
 
                 public void actionPerformed(ActionEvent ae) {
 
-                    JOptionPane.showMessageDialog(null, "La respuesta es correcta");
+                    System.out.print("La respuesta es correcta");
 
                 }
 
             });
 
         }
+    }
+
+    private void btnCompruebaMouseClicked(java.awt.event.MouseEvent evt) {
+
+        boolean afirmativo = btnTrue.isSelected();
+        if (resps.get(numero).equals("V") && afirmativo) {
+            System.out.print("Respuesta correcta");
+            puntos++;
+        } else if (resps.get(numero).equals("F") && !afirmativo) {
+            System.out.print("Respuesta correcta");
+            puntos++;
+        } else {
+            System.out.print("Respuesta incorrecta");
+            if (puntos > 0) {
+                puntos--;
+            }
+        }
+        txtConta.setText(String.valueOf(puntos));
     }//GEN-LAST:event_btnTrueActionPerformed
 
     /**
