@@ -20,15 +20,13 @@ public class MenuPrincipal {
 
     public void menuUsuario() {
         do {
-            System.out.println("******GESTOR DE JUEGOS******");
-            System.out.println("1.Competencias de Natación.\n"
+            JOptionPane.showInputDialog("******GESTOR DE JUEGOS******");
+            JOptionPane.showInputDialog("1.Competencias de Natación.\n"
                     + "2.Preguntas y Respuestas.\n"
                     + "3.Atrás.");
-            System.out.println("Ingrese opción deseada:");
-            opcion = entrada.nextInt();
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese opción deseada:"));
             switch (opcion) {
                 case 1:
-
                     menuNatacion();
                     break;
                 case 2:
@@ -43,24 +41,21 @@ public class MenuPrincipal {
 
     public void menuNatacion() {
         do {
-            System.out.println("1.Ingresar competidor\n2.Eliminar competidor"
+            JOptionPane.showInputDialog("1.Ingresar competidor\n2.Eliminar competidor"
                     + "\n3.Iniciar juego\n4.Jugador más ganador"
                     + "\n5.Jugador más perdedor\n6.Estadísticas"
                     + "\n7. Limpiar estadísticas"
                     + "\n8. Empates");
-            System.out.println("Ingrese opción deseada:");
-            opcion = entrada.nextInt();
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese opción deseada:"));
             switch (opcion) {
                 case 1:
-                    System.out.println("Digite nombre del competidor:");
-                    entrada.nextLine();
-                    String nombre = entrada.nextLine();
+                    String nombre = JOptionPane.showInputDialog("Digite nombre del competidor:");
                     if (!competencia.agregarCompetidor(new Competidor(nombre))) {
-                        System.out.println("No se pueden agregar más competidores");
+                        JOptionPane.showInputDialog("No se pueden agregar más competidores");
                     }
                     break;
                 case 2:
-
+                    
                     break;
                 case 3:
                     competencia.aumentarCantidadJuegos();
@@ -91,8 +86,8 @@ public class MenuPrincipal {
                 case 8:
                     System.out.println(competencia.getCantidadEmpates());
                 default:
-                    System.out.println("Error! Digite opción válida!!");
-                    menuUsuario();
+                    JOptionPane.showMessageDialog(null, "Error! Digite opción válida!!");
+//                    menuUsuario();
                     break;
             }
         } while (opcion != 8);
