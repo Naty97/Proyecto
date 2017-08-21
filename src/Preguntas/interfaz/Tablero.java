@@ -11,6 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
+import Preguntas.Pregunta;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Tablero extends javax.swing.JFrame {
 
@@ -18,12 +22,14 @@ public class Tablero extends javax.swing.JFrame {
     JLabel[][] matrizLb = new JLabel[5][8];
     private Timer time;
     private int conta = 0;
+    JButton boton = new JButton();
 
     public Tablero() {
         initComponents();
         setTitle("Preguntas y Respuestas");
         mosMat(matrizLb, matrizInt);
-
+        jPanel1.setVisible(true);
+        preguntas();
 //        cargarBotones();
     }
 
@@ -119,6 +125,118 @@ public class Tablero extends javax.swing.JFrame {
         }
     }
 
+    public void preguntas() {
+        ArrayList<String> pregs = new ArrayList<String>();
+        ArrayList<String> resps = new ArrayList<String>();
+        Random aleaPregs = new Random();
+        int numero;
+        numero = (int) Math.floor(Math.random() * 50);
+        pregs.add("El elemento básico de Java es el objeto?");
+        resps.add("V");
+        pregs.add("Las plantillas para crear objetos son denominadas instancias?");
+        resps.add("F");
+        pregs.add("Un objeto es un conjunto de variables?");
+        resps.add("V");
+        pregs.add("Un objeto particular se denomina una instancia?");
+        resps.add("V");
+        pregs.add("La encapsulación de variables consiste en liberar las varibles?");
+        resps.add("F");
+        pregs.add("Una clase es una plantilla que define variables?");
+        resps.add("V");
+        pregs.add("La herencia permite definir nuevas clases a partir de otras existentes?");
+        resps.add("V");
+        pregs.add("Las subclases heredan los estados de las superclases?");
+        resps.add("V");
+        pregs.add("Las clases derivadas se encuentran limitadas por los estados?");
+        resps.add("F");
+        pregs.add("Con Herencia se puede reutilizar el código?");
+        resps.add("V");
+        pregs.add("Con Herencia se pueden implementar superclases abstractas?");
+        resps.add("V");
+        pregs.add("Las superclases abstractas definen comportamientos genéricos?");
+        resps.add("V");
+        pregs.add("Un arrayList es lo mismo que una matriz?");
+        resps.add("F");
+        pregs.add("Las palabras reservadas son palabras que el compilador reconoce como especiales?");
+        resps.add("V");
+        pregs.add("El \"for\" sirve para recorrer matrices? ");
+        resps.add("V");
+        pregs.add("Un algoritmo es lo mismo que pseudocódigo?");
+        resps.add("F");
+        pregs.add("Un programa es la implementación del algoritmo en un lenguaje de programación?");
+        resps.add("V");
+        pregs.add("Un compilador genera un programa ejecutable a partir del código fuente?");
+        resps.add("V");
+        pregs.add("El mantenimiento adaptativo es la correción de defectos?");
+        resps.add("F");
+        pregs.add("Los Bytecodes son el lenguaje máquina de una máquina virtual?");
+        resps.add("V");
+        pregs.add("Los applets son programas independientes?");
+        resps.add("F");
+        pregs.add("El punto de entrada de un programa en Java es el main?");
+        resps.add("V");
+        pregs.add("Un Array es una estructura de datos que contiene datos de diferente tipo?");
+        resps.add("F");
+        pregs.add("El tamaño del Array se establece después de crearlo?");
+        resps.add("F");
+        pregs.add("A los arrays unidimensionales se les conoce como matrices?");
+        resps.add("F");
+        pregs.add("A los arrays bidimensionales se les conoce como vectores?");
+        resps.add("F");
+        pregs.add("Para declarar un array se utilizan paréntesis?");
+        resps.add("F");
+        pregs.add("Los arrays se crean sin el operador \"new\"?");
+        resps.add("F");
+        pregs.add("El tamaño se indica después de los corchetes?");
+        resps.add("F");
+        pregs.add("Un While hace la misma función que un Do - While?");
+        resps.add("F");
+        pregs.add("El primer lenguaje de alto nivel fue Java?");
+        resps.add("F");
+        pregs.add("If, else, for y while son funciones de acceso a datos?");
+        resps.add("F");
+        pregs.add("EOF (End of file) significa Empty or full?");
+        resps.add("F");
+        pregs.add("Los operadores relacionales se utilizan para suma y resta?");
+        resps.add("F");
+        pregs.add("El pseudocódigo es un lenguaje verdadero?");
+        resps.add("F");
+        pregs.add("Se comparar la variable int con una variable booleana?");
+        resps.add("F");
+        pregs.add("Java es un lenguaje orientado a objetos?");
+        resps.add("V");
+        pregs.add("File, edit, view son algunas funciones de NetBeans?");
+        resps.add("V");
+        pregs.add("NetBeans está hecho principalmente para el lenguaje de programacion java?");
+        resps.add("V");
+        pregs.add("La meanera correcta de utilizar un for es asi: for (i <= 10;  i++; int i = 1)?");
+        resps.add("F");
+        pregs.add("Operadores aritmeticos de java son los siguientes: +, -, *, /, % ?");
+        resps.add("V");
+        pregs.add("Es correcto importar el Scanner de esta manera: #import javax.util.Scanner?");
+        resps.add("F");
+        pregs.add("Estos son tipos de variables de java: int, char, String y byte ?");
+        resps.add("V");
+        pregs.add("Las llaves son imprescindibles en Java?");
+        resps.add("V");
+        pregs.add("En sí, Java es una colección de clases?");
+        resps.add("V");
+        pregs.add("Javadoc es el generador de documentación?");
+        resps.add("V");
+        pregs.add("Un String es para mostrar cadenas?");
+        resps.add("V");
+        pregs.add("Los operadores condicionales son los siguientes: <, >=, >=, >, ==?");
+        resps.add("F");
+        pregs.add("Operadores relacionales son los siguientes: <, >=, >=, >, == ");
+        resps.add("V");
+        pregs.add("Una lista es lo mismo que un arreglo?");
+        resps.add("F");
+        pregs.get(numero);
+        resps.get(numero);
+        txtPregs.setText(pregs.get(numero));
+        System.out.print(resps);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,13 +246,14 @@ public class Tablero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tablero = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnTrue = new javax.swing.JRadioButton();
         btnFalse = new javax.swing.JRadioButton();
         btnComprueba = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtPregs = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         txtPuntos = new javax.swing.JLabel();
         txtConta = new javax.swing.JTextField();
@@ -142,6 +261,10 @@ public class Tablero extends javax.swing.JFrame {
         txtCrono = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
+        txtTime = new javax.swing.JLabel();
+        num1 = new javax.swing.JLabel();
+        num2 = new javax.swing.JLabel();
+        num3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,38 +272,44 @@ public class Tablero extends javax.swing.JFrame {
         tablero.setLayout(tableroLayout);
         tableroLayout.setHorizontalGroup(
             tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 753, Short.MAX_VALUE)
+            .addGap(0, 741, Short.MAX_VALUE)
         );
         tableroLayout.setVerticalGroup(
             tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
         );
 
         btnTrue.setText("Verdadero");
+        btnTrue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrueActionPerformed(evt);
+            }
+        });
 
         btnFalse.setText("Falso");
 
         btnComprueba.setText("Comprobar");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtPregs.setColumns(20);
+        txtPregs.setRows(5);
+        jScrollPane1.setViewportView(txtPregs);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(35, 35, 35)
                 .addComponent(btnTrue, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFalse, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(194, 194, 194)
+                .addGap(165, 165, 165)
                 .addComponent(btnComprueba, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
         );
@@ -191,8 +320,8 @@ public class Tablero extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTrue)
-                    .addComponent(btnFalse))
+                    .addComponent(btnFalse)
+                    .addComponent(btnTrue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnComprueba, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addContainerGap())
@@ -205,9 +334,9 @@ public class Tablero extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(22, 22, 22)
                 .addComponent(txtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(35, 35, 35)
                 .addComponent(txtConta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -237,31 +366,52 @@ public class Tablero extends javax.swing.JFrame {
             }
         });
 
+        txtTime.setText("Tiempo:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnStart)
-                .addGap(197, 197, 197)
-                .addComponent(btnStop)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtCrono, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCrono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnStart)
+                    .addComponent(btnStop))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(num2, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addComponent(num1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(num3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(txtCrono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(0, 26, Short.MAX_VALUE)
+                .addComponent(num1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStart)
-                    .addComponent(btnStop))
-                .addGap(44, 44, 44))
+                    .addComponent(num2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnStop)
+                    .addComponent(num3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtCrono, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,18 +420,18 @@ public class Tablero extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 68, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 19, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,35 +440,55 @@ public class Tablero extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addComponent(tablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCompruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompruebaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnCompruebaActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         time = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               conta++;
-               txtCrono.setText(conta + "");
+                conta++;
+                txtCrono.setText(conta + "");
+                if (conta >= 60) {
+                    time.stop();
+                }
             }
-        
-    });
+
+        });
         time.start();
-        
+
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
         time.stop();
     }//GEN-LAST:event_btnStopActionPerformed
+
+    private void btnTrueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrueActionPerformed
+        {
+            boton.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent ae) {
+
+                    JOptionPane.showMessageDialog(null, "La respuesta es correcta");
+
+                }
+
+            });
+
+        }
+    }//GEN-LAST:event_btnTrueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,14 +531,19 @@ public class Tablero extends javax.swing.JFrame {
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
     private javax.swing.JRadioButton btnTrue;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel num1;
+    private javax.swing.JLabel num2;
+    private javax.swing.JLabel num3;
     private javax.swing.JPanel tablero;
     private javax.swing.JTextField txtConta;
     private javax.swing.JLabel txtCrono;
+    private javax.swing.JTextArea txtPregs;
     private javax.swing.JLabel txtPuntos;
+    private javax.swing.JLabel txtTime;
     // End of variables declaration//GEN-END:variables
 }

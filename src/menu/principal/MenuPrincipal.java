@@ -3,6 +3,7 @@ package menu.principal;
 import Natacion.Competencia;
 import Natacion.Competidor;
 import Natacion.interfaz.Piscina;
+import Preguntas.interfaz.Tablero;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -136,6 +137,12 @@ public class MenuPrincipal {
     }
 
     public void menuPreguntas() {
-
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            Tablero tablero = new Tablero();
+                            tablero.setVisible(true);
+                        }
+                    });
     }
 }
